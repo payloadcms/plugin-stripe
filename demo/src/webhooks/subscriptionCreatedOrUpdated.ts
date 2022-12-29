@@ -69,6 +69,7 @@ export const subscriptionCreatedOrUpdated = async (args) => {
         payload.logger.info(`- Subscription already exists, now updating.`);
         // update existing subscription
         subscriptions[indexOfSubscription] = {
+          stripeSubscriptionID: eventID,
           stripeProductID: plan.product,
           product: payloadProductID,
           status: subscriptionStatus
