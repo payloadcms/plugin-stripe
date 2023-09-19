@@ -63,7 +63,7 @@ export const syncExistingWithStripe: CollectionBeforeChangeHookWithArgs = async 
               )
           } catch (error: unknown) {
             const msg = error instanceof Error ? error.message : error
-            throw new APIError(`Failed to sync document with ID: '${data.id}' to Stripe: ${msg}`)
+            throw new APIError(`Failed to sync document with ID: '${data.stripeID}' to Stripe: ${msg}`)
           }
         }
       }
