@@ -77,6 +77,9 @@ export const stripeWebhooks = async (args: {
         }
       }
     }
+  } else {
+    if (stripeConfig?.logs)
+      req.payload.logger.warn(`⚠️ Webhooks enabled but \`stripeWebhooksEndpointSecret\` is missing in config.`)
   }
 
   res.json({ received: true })
