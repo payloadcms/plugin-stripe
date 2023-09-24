@@ -4,6 +4,7 @@ import Stripe from 'stripe'
 
 import type { StripeConfig } from '../types'
 import { deepen } from '../utilities/deepen'
+import { filterFieldsForStripe } from '../utilities/filterFieldsForStripte'
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 const stripe = new Stripe(stripeSecretKey || '', { apiVersion: '2022-08-01' })
@@ -43,7 +44,7 @@ export const createNewInStripe: CollectionBeforeValidateHookWithArgs = async arg
 
       if (syncConfig) {
         // combine all fields of this object and match their respective values within the document
-        let syncedFields = syncConfig.fields.reduce((acc, field) => {
+        let syncedFields = filterFieldsForStripe(syncConfig.fields).reduce((acc, field) => {
           const { fieldPath, stripeProperty } = field
 
           acc[stripeProperty] = dataRef[fieldPath]
