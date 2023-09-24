@@ -14,9 +14,14 @@ export interface StripeWebhookHandlers {
   [webhookName: string]: StripeWebhookHandler
 }
 
+export const FieldSyncToStripeValues = ['to-stripe', 'both'] as const
+export const FieldSyncToPayloadValues = ['to-payload', 'both'] as const
+export const FieldSyncValues = [...FieldSyncToStripeValues, ...FieldSyncToPayloadValues] as const
+
 export interface FieldSyncConfig {
   fieldPath: string
   stripeProperty: string
+  syncDirection?: (typeof FieldSyncValues)[number]
 }
 
 export interface SyncConfig {
